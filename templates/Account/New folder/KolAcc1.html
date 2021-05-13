@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}{% block title-meta %}
+     حسابهای کل
+{% endblock %}{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+
+                            <h2 class="input-group-btn">
+                                <h4><a  class="badge badge-primary f" href="{% url 'Accounts:CreateKolAcc' %}">ثبت حساب کل جدید</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th> گروه حساب</th>
+                            <th>کد حساب کل</th>
+                            <th>عنوان حساب کل</th>
+                            <th>نوع</th>
+                            <th>تاریخ ثبت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        {% for KolAcc in object_list %}
+                            <tr>
+                                <td>{{ KolAcc.CodeGroup }}</td>
+                                <td>{{ KolAcc.CodeKol }}</td>
+                                <td>{{ KolAcc.TitleKol }}</td>
+                                <td>{{ KolAcc.Kind_s }}</td>
+                                <td>{{ KolAcc.JDateSabt }}</td>
+                                <td>
+                                    <a class="badge badge-danger" href="{% url 'Accounts:UpdateKolAcc' KolAcc.pk %}">ویرایش</a>
+                                    <a class="badge badge-success" href="#">نمایش حسابهای معین</a>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% block title-meta %}
+    ثبت حسابهای معین
+{% endblock %}{% endblock %}
+{% block main %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="content-wrapper" style="min-height: 940.9px;">
+                <section class="content-header">
+                    <h1>
+                        داشبرد
+                        <small>کنترل پنل</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+                        <li class="active">داشبرد</li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <!-- Small boxes (Stat box) -->
+
+                    <!-- /.row -->
+                    <div class="row">
+                        <section class="col-lg-12 col-md-12">
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <i class="fa fa-info-circle"></i>
+                                    <h3 class="box-title" style="color: #004bec">ثبت حساب معین</h3>
+                                    {#    <div class="col-md-12">#}
+                                    <div class="card card-primary">
+                                        <div class="card-header with-border">
+                                            <h5 class="card-title mb-0 float-left" style="color: red">لطفا اطلاعات حساب معین جدید را وارد
+                                                نمایید.</h5>
+                                        </div>
+                                    <hr>
+                                        <div class="card-body">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {{ form.CodeKol|as_crispy_field }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{ form.CodeMoin|as_crispy_field }}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        {{ form.TitleMoin|as_crispy_field }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                       {{ form.Kind|as_crispy_field }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                       {{ form.TafRel|as_crispy_field }}
+                                                    </div>
+
+                                                </div>
+
+
+                                                <button class="btn btn-success" onclick="alert('حساب معین جدید ثبت شد')">ثبت حساب کل</button>
+                                                {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+                                                    <a href="{% url 'Accounts:DeleteKolAcc' request.resolver_match.kwargs.pk %}"
+                                                       class="btn btn-danger">
+                                                        حذف
+                                                    </a>
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- tools box -->
+
+
+                                    <!-- /. tools -->
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+
+                    <!-- /.container-fluid -->
+                </section>
+
+
+{% endblock %}

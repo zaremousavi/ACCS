@@ -1,0 +1,64 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load base_tags %}
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-right image">
+                <img src="{% static 'adminLTE/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-right info">
+                <p>{{ user.get_full_name }}</p>
+                {#          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>#}
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                {#          <input type="text" name="q" class="form-control" placeholder="جستجو">#}
+                {#          <span class="input-group-btn">#}
+                {#                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>#}
+                {#                </button>#}
+                {#              </span>#}
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            {#            <li class="header">منو</li>#}
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>حسابها</span>
+                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                </a>
+                <ul class="nav treeview-menu">
+                    {#            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> داشبرد اول</a></li>#}
+                    {% link request 'ListGroupAcc' 'حسابهای گروه' %}
+                    {% link request 'ListKolAcc' 'حسابهای کل' %}
+                    {% link request 'ListMoinAcc' 'حسابهای معین' %}
+                    {% link request 'ListGroupTaf' 'گروه تفصیلی' %}
+                    {% link request 'ListTafsili' 'تفصیلی' %}
+                    {% link request 'ListMoinTafsili' 'ارتباط معین و گروه تفصیلی' %}
+
+                </ul>
+            </li>
+
+
+
+
+
+
+
+
+{#            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>#}
+{#            <li class="header">برچسب ها</li>#}
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{% block title-meta %}
+     گروه تفصیلی
+{% endblock %}{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+
+                            <h2 class="input-group-btn">
+                                <h4><a  class="badge badge-primary f" href="{% url 'Accounts:CreateGroupTaf' %}">ثبت گروه تفصیلی جدید</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>کد گروه تفصیلی</th>
+                            <th>عنوان گروه تفصیلی</th>
+                            <th>تاریخ ثبت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        {% for GrTaf in object_list %}
+                            <tr>
+                                <td>{{ GrTaf.CodeGroupTaf }}</td>
+                                <td>{{ GrTaf.TitleGroupTaf }}</td>
+                                <td>{{ GrTaf.JDateSabt }}</td>
+                                <td>
+                                    <a class="badge badge-danger" href="{% url 'Accounts:UpdateGroupTaf' GrTaf.pk %}">ویرایش</a>
+                                    <a class="badge badge-success" href="#">نمایش حسابهای تفصیلی</a>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+{% endblock %}

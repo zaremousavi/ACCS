@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% block title-meta %}
+    ثبت حسابهای معین
+{% endblock %}{% endblock %}
+{% block main %}
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header with-border">
+                <h3 class="card-title mb-0 float-left">لطفا اطلاعات حسابهای معین جدید را وارد نمایید.</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form.CodeKol|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.CodeMoin|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.TitleMoin|as_crispy_field }}
+                        </div>
+
+                        <div class="col-6">
+                            {{ form.Kind|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.TafRel|as_crispy_field }}
+                        </div>
+                        {#                        <div class="col-6">#}
+                        {#                            {{ form.Company|as_crispy_field }}#}
+                        {#                        </div>#}
+                        {#                        <div class="col-6">#}
+                        {#                            {{ form.UserSabt|as_crispy_field }}#}
+                        {#                        </div>#}
+                    </div>
+
+
+                    <button class="btn btn-success">ثبت حساب معین</button>
+                    {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+                        <a href="{% url 'Accounts:DeleteMoinAcc' request.resolver_match.kwargs.pk %}"
+                           class="btn btn-danger">
+                            حذف
+                        </a>
+                    {% endif %}
+
+                </form>
+            </div>
+        </div>
+{% endblock %}

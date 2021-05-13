@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}{% block title-meta %}
+    حسابهای کل
+{% endblock %}{% endblock %}
+{% block main %}
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <!-- /.row (main row) -->
+
+
+            <div class="content-wrapper" style="min-height: 940.9px;">
+                <!-- Content Header (Page header) -->
+{#                <section class="content-header">#}
+{#                    <h1>#}
+{#                        داشبرد#}
+{#                        <small>کنترل پنل</small>#}
+{#                    </h1>#}
+{#                    <ol class="breadcrumb">#}
+{#                        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>#}
+{#                        <li class="active">داشبرد</li>#}
+{#                    </ol>#}
+{#                </section>#}
+
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Small boxes (Stat box) -->
+
+                    <!-- /.row -->
+                    <div class="row">
+                        <section class="col-lg-12 col-md-12">
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <i class="fa fa-info-circle"></i>
+                                    <h3 class="box-title">حسابهای کل</h3>
+                                    <!-- tools box -->
+                                    <h4><a class="label label-warning f" href="{% url 'Accounts:CreateKolAcc' %}">ثبت حساب
+                                        کل جدید</a></h4>
+
+
+                                    <!-- /. tools -->
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box">
+
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <th> گروه حساب</th>
+                                            <th>کد حساب کل</th>
+                                            <th>عنوان حساب کل</th>
+                                            <th>نوع</th>
+                                            <th>تاریخ ثبت</th>
+                                            <th>عملیات</th>
+                                        </tr>
+
+                                        {% for KolAcc in object_list %}
+                                            <tr>
+                                                <td>{{ KolAcc.CodeGroup }}</td>
+                                                <td>{{ KolAcc.CodeKol }}</td>
+                                                <td>{{ KolAcc.TitleKol }}</td>
+                                                <td>{{ KolAcc.Kind_s }}</td>
+                                                <td>{{ KolAcc.JDateSabt }}</td>
+                                                <td>
+                                                    <a class="label label-danger"
+                                                       href="{% url 'Accounts:UpdateKolAcc' KolAcc.pk %}">ویرایش</a>
+                                                    <a class="label label-success" href="#">نمایش حسابهای معین</a>
+                                                </td>
+                                            </tr>
+
+
+                                        {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                        <li><a href="#">«</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">»</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /.box -->
+
+
+                            <!-- /.box -->
+                        </div>
+                    </div>
+
+
+                    <!-- Main row -->
+
+                    <!-- /.row (main row) -->
+
+                </section>
+                <!-- /.content -->
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+{% endblock %}
