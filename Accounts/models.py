@@ -14,7 +14,7 @@ class GroupAcc(models.Model):
     kind = models.CharField(max_length=1, choices=getchoice, verbose_name='نوع')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
-    # Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
         return '%s--%s' % (self.CodeGroup, self.TitleGroup)
@@ -40,7 +40,7 @@ class GroupAcc(models.Model):
         verbose_name= 'گروه حسابها'
         db_table = 'GroupAcc'
         ordering = ['CodeGroup']
-        # unique_together = ['CodeGroup', 'Company']
+        unique_together = ['CodeGroup', 'Company']
         indexes = [
             models.Index(fields=['id']),
         ]
@@ -54,7 +54,7 @@ class KolAcc(models.Model):
     kind = models.CharField(max_length=1, choices=getchoice1, verbose_name='نوع حساب')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
-    # Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
         return '%s %s' % (self.CodeKol, self.TitleKol)
@@ -84,7 +84,7 @@ class KolAcc(models.Model):
         verbose_name= 'حساب کل'
         db_table = 'KolAcc'
         ordering = ['CodeKol']
-        # unique_together = ['CodeKol', 'Company']
+        unique_together = ['CodeKol', 'Company']
         indexes = [
             models.Index(fields=['id']),
         ]
@@ -99,7 +99,7 @@ class MoinAcc(models.Model):
     # Arz =
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
-    # Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
         return '%s %s' % (self.CodeMoin, self.TitleMoin)
@@ -114,7 +114,7 @@ class MoinAcc(models.Model):
         verbose_name= 'حساب معین'
         db_table = 'MoinAcc'
         ordering = ['CodeMoin']
-        # unique_together = ['CodeMoin', 'Company']
+        unique_together = ['CodeMoin', 'Company']
         indexes = [
             models.Index(fields=['id']),
         ]
@@ -124,7 +124,7 @@ class GroupTaf(models.Model):
     TitleGroupTaf = models.CharField(max_length=150, verbose_name='عنوان گروه تفصیلی')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
-    # Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
         return '%s %s' % (self.CodeGroupTaf, self.TitleGroupTaf)
@@ -139,7 +139,7 @@ class GroupTaf(models.Model):
         verbose_name= 'گروه تفصیلی'
         db_table = 'GroupTaf'
         ordering = ['CodeGroupTaf']
-        # unique_together = ['CodeGroupTaf', 'Company']
+        unique_together = ['CodeGroupTaf', 'Company']
         indexes = [
             models.Index(fields=['id']),
         ]
@@ -156,7 +156,7 @@ class Tafsili(models.Model):
     is_Tax = models.CharField(max_length=1, choices=TaxChoice, verbose_name='وضعیت مالیاتی')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
-    # Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
         return '%s %s' % (self.CodeTafsili, self.TitleTafsili)
@@ -183,7 +183,7 @@ class Tafsili(models.Model):
         verbose_name= 'تفصیلی'
         db_table = 'Tafsili'
         ordering = ['CodeTafsili']
-        # unique_together = ['CodeTafsili', 'Company']
+        unique_together = ['CodeTafsili', 'Company']
         indexes = [
             models.Index(fields=['id']),
         ]
