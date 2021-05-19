@@ -1,298 +1,336 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-
-{% block title %}{% block title-meta %}
-    ارتباط حساب معین با گروه تفصیلی
-{% endblock %}{% endblock %}
-{% block main %}
-    <style>
-        body {
-            font-family: Vazir, Helvetica, sans-serif;
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block title %}{% block title-meta %} ارتباط حساب معین با گروه تفصیلی {% endblock %}{% endblock %} {% block main %}
+<style>
+    body {
+        font-family: Vazir, Helvetica, sans-serif;
+    }
+    /* Full-width input fields */
+    
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    /* Set a style for all buttons */
+    
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    button:hover {
+        opacity: 0.8;
+    }
+    /* Extra styles for the cancel button */
+    
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+    /* Center the image and position the close button */
+    
+    .container {
+        padding: 16px;
+        width: auto;
+    }
+    /* The Modal (background) */
+    
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        right: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+    /* Modal Content/Box */
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 55%;
+        /* Could be more or less, depending on screen size */
+    }
+    /* The Close Button (x) */
+    
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+    /* Add Zoom Animation */
+    
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+    
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
         }
-
-        /* Full-width input fields */
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+        to {
+            -webkit-transform: scale(1)
         }
-
-        /* Set a style for all buttons */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
+    }
+    
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
         }
-
-        button:hover {
-            opacity: 0.8;
+        to {
+            transform: scale(1)
         }
-
-        /* Extra styles for the cancel button */
+    }
+    /* Change styles for span and cancel button on extra small screens */
+    
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
         .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
+            width: 100%;
         }
+    }
+</style>
 
-        /* Center the image and position the close button */
+<div id="id01" class="modal">
 
-
-        .container {
-            padding: 16px;
-            width: auto;
-        }
-
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            right: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 55%; /* Could be more or less, depending on screen size */
-        }
-
-        /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-        /* Add Zoom Animation */
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-            from {
-                -webkit-transform: scale(0)
-            }
-            to {
-                -webkit-transform: scale(1)
-            }
-        }
-
-        @keyframes animatezoom {
-            from {
-                transform: scale(0)
-            }
-            to {
-                transform: scale(1)
-            }
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-    </style>
-
-    <div id="id01" class="modal">
-
-        <form class="modal-content animate" action="" method="post">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                {#      <img src="" alt="Avatar" class="avatar">#}
-            </div>
-            <hr>
-            <div class="container">
+    <form class="modal-content animate" action="" method="post">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> {# <img src="" alt="Avatar" class="avatar">#}
+        </div>
+        <hr>
+        <div class="container">
 
 
-                <table id="GTaf" class="table" style="width:100%">
-                    <thead>
+            <table id="GTaf" class="table" style="width:100%">
+                <thead>
                     <tr>
                         <th style="background-color: #9fcdff">کد گروه تفصیلی</th>
                         <th style="background-color: #9fcdff">عنوان گروه تفصیلی</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     {% for GT in GTaf %}
-                        <tr ondblclick="getvalue({{ GT.CodeGroupTaf }})">
-                            <td>{{ GT.CodeGroupTaf }}</td>
-                            <td>{{ GT.TitleGroupTaf }}</td>
-                        </tr>
+                    <tr ondblclick="getvalue({{ GT.CodeGroupTaf }})">
+                        <td>{{ GT.CodeGroupTaf }}</td>
+                        <td>{{ GT.TitleGroupTaf }}</td>
+                    </tr>
                     {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <script>
-                function getvalue(x) {
-                    document.getElementById('id01').style.display = 'none';
-                    document.getElementById("tbl").rows[row].cells[col].innerText = x;
-                }
-
-            </script>
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function getvalue(x) {
+                document.getElementById('id01').style.display = 'none';
+                document.getElementById("table").rows[row].cells[col].innerText = x;
+            }
+        </script>
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
                     انصراف
                 </button>
 
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 
 
 
 
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="content-wrapper" style="min-height: 940.9px;">
-                <section class="content">
-                    <div class="callout callout-info">
-                        <h4>توجه</h4>
+<section class="content">
+    <div class="container-fluid">
+        <div class="content-wrapper" style="min-height: 940.9px;">
+            <section class="content">
+                <div class="callout callout-info">
+                    <h4>توجه</h4>
 
-                        <p>برای ارتباط بین حسابهای معین و گروه تفصیلی بایستی از جدول ذیل استفاده نمایید</p>
-                    </div>
-                    <!-- Default box -->
+                    <p>برای ارتباط بین حسابهای معین و گروه تفصیلی بایستی از جدول ذیل استفاده نمایید</p>
+                </div>
+                <!-- Default box -->
 
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">ارتباط حساب معین با گروه تفصیلی</h3>
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">ارتباط حساب معین با گروه تفصیلی</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"
-                                        data-toggle="tooltip"
-                                        title=""
-                                        data-original-title="Collapse">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
                                     <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"
-                                        data-toggle="tooltip"
-                                        title=""
-                                        data-original-title="Remove">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
                                     <i class="fa fa-times"></i></button>
-                            </div>
                         </div>
+                    </div>
+                    <div class="box-body">
+
+
+
+
+
+
                         <div class="box-body">
-                            {#                            <div>#}
-                            {#                                <select name="kol" size="{{ Moins.count }}">#}
-                            {#                                    {% for Moin in Moins %}#}
-                            {#                                        <option value="{{ Moin.CodeMoin }}"> {{ Moin.CodeKol }} ==> {{ Moin.CodeMoin }} {{ Moin.TitleMoin }} </option>#}
-                            {#                                    {% endfor %}#}
-                            {#                                </select>#}
-                            {#                            </div>#}
-
-
-                            <div class="box-body">
-                                <table class="table table-bordered" id="tbl">
-                                    <tbody>
+                            <table class="table table-bordered" id="table">
+                                <tbody>
                                     <tr>
-                                        <th style="background-color: #ffb8f6">کد حساب کل</th>
-                                        <th style="background-color: #ffb8f6">کد حساب معین</th>
-                                        <th style="background-color: #ffb8f6">عنوان حساب معین</th>
-                                        <th style="background-color: #ffb8f6">تفصیلی ۱</th>
-                                        <th style="background-color: #ffb8f6">تفصیلی ۲</th>
-                                        <th style="background-color: #ffb8f6">تفصیلی ۳</th>
-                                        <th style="background-color: #ffb8f6">تفصیلی ۴</th>
+                                        <th style="background-color: #ccc; color:blue;">ردیف</th>
+                                        <th style="background-color: #ccc; color:blue;">کد حساب کل</th>
+                                        <th style="background-color: #ccc; color:blue;">کد حساب معین</th>
+                                        <th style="background-color: #ccc; color:blue;">عنوان حساب معین</th>
+                                        <th style="background-color: #ccc; color:blue;">تفصیلی ۱</th>
+                                        <th style="background-color: #ccc; color:blue;">تفصیلی ۲</th>
+                                        <th style="background-color: #ccc; color:blue;">تفصیلی ۳</th>
+                                        <th style="background-color: #ccc; color:blue;">تفصیلی ۴</th>
+                                        <th style="background-color: #ccc; color:blue;">عملیات</th>
                                     </tr>
-
                                     {% for Moin in Moins %}
-                                        <tr>
-                                            <td>{{ Moin.CodeKol }}</td>
-                                            <td>{{ Moin.CodeMoin }}</td>
-                                            <td>{{ Moin.TitleMoin }}</td>
-                                            <td contenteditable='true' ondblclick="col = this.cellIndex;
-                                                row = this.parentNode.rowIndex;
-                                                document.getElementById('id01').style.display = 'block';">
-                                                <input type="number" class="form-control" name="txt1" placeholder="سطح 1"\>
-                                            </td>
-                                            <td contenteditable='true' ondblclick="col = this.cellIndex;
-                                                row = this.parentNode.rowIndex;
-                                                document.getElementById('id01').style.display = 'block';">
-                                                <input type="number" class="form-control" name="txt1" placeholder="سطح 2"\>
-                                            </td>
-                                            <td contenteditable='true' ondblclick="col = this.cellIndex;
-                                                row = this.parentNode.rowIndex;
-                                                document.getElementById('id01').style.display = 'block';">
-                                                <input type="number" class="form-control" name="txt1" placeholder="سطح 3"\>
-                                            </td>
-                                            <td contenteditable='true' ondblclick="col = this.cellIndex;
-                                                row = this.parentNode.rowIndex;
-                                                document.getElementById('id01').style.display = 'block';">
-                                                <input type="number" class="form-control" name="txt1" placeholder="سطح 4"\>
-                                            </td>
+                                    <tr id="{{ forloop.counter }}">
+                                        <td class="row-data">{{ forloop.counter }}</td>
+                                        <td class="row-data">{{ Moin.CodeKol }}</td>
+                                        <td class="row-data">{{ Moin.CodeMoin }}</td>
+                                        <td class="row-data">{{ Moin.TitleMoin }}</td>
+                                        <td class="row-data" contenteditable='true' ondblclick=" col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
 
-                                        </tr>
+                                        </td>
+                                        <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                        </td>
+                                        <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                        </td>
+                                        <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                        </td>
+                                        <td>
+                                            <input type="button" value="ثبت اطلاعات" class=" btn btn-warning" onclick="save()" \>
+                                        </td>
+
+                                    </tr>
 
 
                                     {% endfor %}
 
 
-                                    </tbody>
-                                </table>
-                                <a href=""
-                                   class="btn btn-success" style="margin: 10px">
-                                    ثبت
-                                </a>
-                            </div>
-
+                                </tbody>
+                            </table>
+                            <!-- <a href=" " class="btn btn-success " style="margin: 10px "> -->
+                            <!-- ثبت -->
+                            <!-- </a> -->
                         </div>
 
-                        <!-- /.box-body -->
-                        {#                        <div class="box-footer">#}
-                        {#                            انتها#}
-                        {#                        </div>#}
-                        <!-- /.box-footer-->
                     </div>
-                    <!-- /.box -->
 
-                </section>
-            </div>
+                    <!-- /.box-body -->
+
+
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+
+            </section>
         </div>
+    </div>
 
-    </section>
-    {#پنل بسته شوند#}
+</section>
+{#پنل بسته شوند#}
 
-    <script>
-        // Get the modal
+<script>
+    // Get the modal
 
-        var modal = document.getElementById('id01');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+
+
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none ";
         }
 
-    </script>
+    }
+</script>
+
+<script>
+    function save() {
+
+        var rowId = event.target.parentNode.parentNode.id;
+
+        var data = document.getElementById(rowId).querySelectorAll(".row-data ");
+
+
+        var moin = data[2].innerHTML;
+        var taf = [data[4].innerText.trim(), data[5].innerText.trim(), data[6].innerText.trim(), data[7].innerText.trim()];
+
+        let csrftoken = '{{ csrf_token }}'
+        for (i = 0; i < 4; i++) {
+
+            if (taf[i] != '') {
+                console.log(taf[i]);
+                var data = {
+                    Gtaf: taf[i],
+                    moin: moin,
+                    level: i + 1
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    url: "{% url 'Accounts:CheckGtafs' %} ",
+                    data: JSON.stringify(data),
+                    datatype: 'json',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        if (data.msg == 'success') {
+                            alert(taf[0] + 'is Ok');
+                        } else if (data.msg == 'error') {
+                            alert('کد در گروه تفصیلی ۱ پیدا نشد: ' + taf[0]);
+                            // document.getElementById("table").cells[4].focus();
+                        }
+                    },
+                    error: function(data) {
+                        if (data.msg == 'error') {
+                            alert(taf[0] + 'is error')
+                        }
+                    }
+
+
+                });
+            };
+        };
+    }
+</script>
 {% endblock %}

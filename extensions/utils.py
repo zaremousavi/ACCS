@@ -28,5 +28,5 @@ def jalali_converter(time):
      
         # time.minute
     # )
-    output = jalali.Gregorian(time_to_str).persian()
+    output = "{} ساعت {}:{}  ".format(jalali.Gregorian(time_to_str).persian(),time.hour, time.minute)
     return (output)

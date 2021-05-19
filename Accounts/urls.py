@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ListGroupAcc, CreateGroupAcc, ListKolAcc, CreateKolAcc, CreateMoinAcc, ListMoinAcc, UpdateGroupAcc
-from .views import DeleteGroupAcc,UpdateKolAcc, DeleteKolAcc, UpdateMoinAcc, DeleteMoinAcc, ListGroupTaf, CreateGroupTaf, UpdateGroupTaf, DeleteGroupTaf
+from .views import DeleteGroupAcc,UpdateKolAcc, DeleteKolAcc, UpdateMoinAcc, DeleteMoinAcc, ListGroupTaf,   CreateGroupTaf, UpdateGroupTaf, DeleteGroupTaf
 from .views import ListTafsili, CreateTafsili, UpdateTafsili, DeleteTafsili
 from . import views
 app_name = 'Accounts'
@@ -31,4 +31,6 @@ urlpatterns = [
     path('DeleteTafsili/<int:pk>', DeleteTafsili.as_view(), name='DeleteTafsili'),
 
     path('ListMoinTafsili/',views.ListMoinTafRel , name='ListMoinTafsili'),
+    path('CheckGtafs/',views.CheckGtafs.as_view() , name='CheckGtafs'),
+
 ]

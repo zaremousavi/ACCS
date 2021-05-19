@@ -192,7 +192,10 @@ class MoinTafRel(models.Model):
     Moin = models.ForeignKey(MoinAcc,on_delete=models.CASCADE, verbose_name='حساب معین')
     Level = models.PositiveSmallIntegerField(validators=[MinValueValidator(1),MaxValueValidator(4)],verbose_name='سطح تفصیلی')
     GroupTaf = models.ForeignKey(GroupTaf,blank=True, null=True, on_delete= 'گروه تفصیلی')
-
+    UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')
+    DateSabt = models.DateTimeField(default=now, auto_created=True, null = True, blank=True, verbose_name='تاریخ ایجاد')
+    Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')  
+    
     class Meta:
         verbose_name= 'ارتباط معین با گروه تفصیلی'
         db_table = 'MoinTafRel'

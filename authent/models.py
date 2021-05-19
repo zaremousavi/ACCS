@@ -6,7 +6,7 @@ from Company.models import Company
 class User(AbstractUser):
     is_company = models.ForeignKey(Company,null=True, blank=True,on_delete=models.CASCADE, verbose_name='نام شرکت')
     is_admin_company = models.BooleanField(default=False, verbose_name='ادمین شرکت')
-    mobile = models.CharField(max_length=10, blank=True, null=True, verbose_name='تلفن همراه')
+    mobile = models.CharField(max_length=11, blank=True, null=True, verbose_name='تلفن همراه')
     def is_company_active(self):
         if (Company.is_active):
             return True

@@ -1,12 +1,18 @@
+from django.db.models.aggregates import Count
 from django.shortcuts import render
-from .models import GroupAcc, KolAcc, MoinAcc, GroupTaf, Tafsili
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import GroupAcc, KolAcc, MoinAcc, GroupTaf, Tafsili, MoinTafRel
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import FormValidMixin, FieldMixin, FieldKolMixin, FormValidKolMixin, FieldMoinMixin, FormValidMoinMixin, \
     AccessMixin
 from .mixins import AccessKolMixin, AccessMoinMixin, AccessGroupTafMixin, FieldGroupTafMixin, FormValidGroupTafMixin
 from .mixins import FormValidTafsiliMixin, AccessTafsiliMixin, FieldTafsiliMixin
-
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .forms import MoinTafRelForm
+from django.utils.timezone import now
+from authent.models import User
+from Company.models import Company
 # Create your views here.
 
 class ListGroupAcc(LoginRequiredMixin, ListView):
@@ -128,3 +134,45 @@ def ListMoinTafRel(request):
     Moin = MoinAcc.objects.filter(Company=request.user.is_company)
     GTafs = GroupTaf.objects.filter(Company=request.user.is_company)
     return render(request, 'Account/MoinTafRel.html', {'Moins':Moin, 'GTaf':GTafs})
+
+@login_required
+def CheckGtaf(request):
+    import json
+    if (request.is_ajax() and request.method=='POST'):
+        Gta = json.loads(request.body)["Gtaf"].strip('\n')#request.POST.get('Gtaf')
+        print(Gta)
+        q = GroupTaf.objects.filter(CodeGroupTaf__exact= Gta, Company=request.user.is_company).count()
+        if q==0 :
+            return JsonResponse({'msg':'error'})
+        else:
+            return JsonResponse({'msg':'success'})
+    else:
+        return JsonResponse({'msg':'NO ajax'})
+
+class CheckGtafs(LoginRequiredMixin,CreateView):
+    def post(self, request, *args, **kwargs):
+        import json
+        if request.is_ajax():
+            Gta = json.loads(request.body)["Gtaf"].strip('\n')
+            q= GroupTaf.objects.filter(CodeGroupTaf__exact=Gta, Company=request.user.is_company).exists()
+            
+            if not q :
+                return JsonResponse({'msg':'error'})
+            else:
+                moin = json.loads(request.body)["moin"].strip('\n')
+                level = json.loads(request.body)["level"]
+                print(now)
+                frm= MoinTafRel(Moin=MoinAcc.objects.get(CodeMoin__exact=moin,  Company=request.user.is_company),
+                    Level=int(level),GroupTaf = GroupTaf.objects.get(CodeGroupTaf__exact=Gta, Company=request.user.is_company)
+                    ,UserSabt = request.user ,Company = Company.objects.get(pk=request.user.is_company.pk)
+                    , DateSabt=now())
+                # if frm.is_valid():
+                frm.save()
+                return JsonResponse({'msg':'success'})
+                # else:
+                #     print(frm.errors)
+                #     return JsonResponse({'msg':'error in saving'})    
+                
+
+        else:
+            return JsonResponse({'msg':'error in loading ajax...'})
