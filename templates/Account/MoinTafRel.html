@@ -318,7 +318,7 @@
                     contentType: 'application/json',
                     success: function(data) {
                         if (data.msg == 'success') {
-                            alert(taf[0] + 'is Ok');
+                            console.log(taf[0] + 'is Ok');
                         } else if (data.msg == 'error') {
                             alert('کد در گروه تفصیلی ۱ پیدا نشد: ' + taf[0]);
                             // document.getElementById("table").cells[4].focus();
