@@ -13,6 +13,7 @@ from .forms import MoinTafRelForm
 from django.utils.timezone import now
 from authent.models import User
 from Company.models import Company
+from django.db import connection
 # Create your views here.
 
 class ListGroupAcc(LoginRequiredMixin, ListView):
@@ -131,23 +132,37 @@ class DeleteTafsili(AccessTafsiliMixin, FormValidTafsiliMixin, FieldTafsiliMixin
 
 
 def ListMoinTafRel(request):
-    Moin = MoinAcc.objects.filter(Company=request.user.is_company)
+    SQL = 'select K."CodeKol" as "CodeKol", M."CodeMoin", M."TitleMoin",\
+                (select "CodeGroupTaf" from "GroupTaf" where id=(select max("GroupTaf_id") from "MoinTafRel" TR where TR."Moin_id"=M."id" and TR."Level"=1)) as Taf1,\
+                (select "CodeGroupTaf" from "GroupTaf" where id=(select max("GroupTaf_id") from "MoinTafRel" TR where TR."Moin_id"=M."id" and TR."Level"=2)) as Taf2,\
+                (select "CodeGroupTaf" from "GroupTaf" where id=(select max("GroupTaf_id") from "MoinTafRel" TR where TR."Moin_id"=M."id" and TR."Level"=3)) as Taf3,\
+                (select "CodeGroupTaf" from "GroupTaf" where id=(select max("GroupTaf_id") from "MoinTafRel" TR where TR."Moin_id"=M."id" and TR."Level"=4)) as Taf4\
+                from "MoinAcc" M join "KolAcc" K ON  M."CodeKol_id"=K."id" \
+                where M."Company_id" = {} order by "CodeKol" , M."CodeMoin"'.format(request.user.is_company.id)
+    print(SQL)
+    with connection.cursor() as cursor:
+        cursor.execute(SQL)
+        Moin = cursor.fetchall()
+    # Moin = MoinAcc.objects.filter(Company=request.user.is_company)
+    # Moin = MoinAcc.objects.raw(
+    #     'SELECT * FROM "MoinACC" where "Company_id"={};'.format(request.user.is_company.id))
     GTafs = GroupTaf.objects.filter(Company=request.user.is_company)
     return render(request, 'Account/MoinTafRel.html', {'Moins':Moin, 'GTaf':GTafs})
 
-@login_required
-def CheckGtaf(request):
-    import json
-    if (request.is_ajax() and request.method=='POST'):
-        Gta = json.loads(request.body)["Gtaf"].strip('\n')#request.POST.get('Gtaf')
-        print(Gta)
-        q = GroupTaf.objects.filter(CodeGroupTaf__exact= Gta, Company=request.user.is_company).count()
-        if q==0 :
-            return JsonResponse({'msg':'error'})
-        else:
-            return JsonResponse({'msg':'success'})
-    else:
-        return JsonResponse({'msg':'NO ajax'})
+# @login_required
+# def CheckGtaf(request):
+#     import json
+#     if (request.is_ajax() and request.method=='POST'):
+#         Gta = json.loads(request.body)["Gtaf"].strip('\n')#request.POST.get('Gtaf')
+#         print(Gta)
+#         q = GroupTaf.objects.filter(CodeGroupTaf__exact= Gta, Company=request.user.is_company).count()
+#         if q==0 :
+#             return JsonResponse({'msg':'error'})
+#         else:
+#             return JsonResponse({'msg':'success'})
+#     else:
+#         return JsonResponse({'msg':'NO ajax'})
+
 
 class CheckGtafs(LoginRequiredMixin,CreateView):
     def post(self, request, *args, **kwargs):
@@ -160,6 +175,10 @@ class CheckGtafs(LoginRequiredMixin,CreateView):
                 return JsonResponse({'msg':'error'})
             else:
                 moin = json.loads(request.body)["moin"].strip('\n')
+                mointaf = MoinTafRel.objects.filter(Moin__CodeMoin__exact=moin, Company=request.user.is_company)
+                if mointaf.exists():
+                    MoinTafRel.objects.filter(Moin__CodeMoin__exact=moin, Company=request.user.is_company).delete()
+
                 level = json.loads(request.body)["level"]
                 print(now)
                 frm= MoinTafRel(Moin=MoinAcc.objects.get(CodeMoin__exact=moin,  Company=request.user.is_company),

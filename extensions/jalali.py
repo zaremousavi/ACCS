@@ -119,7 +119,7 @@ class Gregorian:
     
     def persian(self, date_format="{} {} {}"):
         mo =[ "فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"]
-        return date_format.format( self.persian_day, mo[self.persian_month],self.persian_year)
+        return date_format.format( self.persian_day, mo[self.persian_month-1],self.persian_year)
 
 
 class Persian:

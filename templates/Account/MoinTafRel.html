@@ -220,17 +220,20 @@
                                     {% for Moin in Moins %}
                                     <tr id="{{ forloop.counter }}">
                                         <td class="row-data">{{ forloop.counter }}</td>
-                                        <td class="row-data">{{ Moin.CodeKol }}</td>
-                                        <td class="row-data">{{ Moin.CodeMoin }}</td>
-                                        <td class="row-data">{{ Moin.TitleMoin }}</td>
+                                        <td class="row-data">{{ Moin.0 }}</td>
+                                        <td class="row-data">{{ Moin.1 }}</td>
+                                        <td class="row-data">{{ Moin.2 }}</td>
                                         <td class="row-data" contenteditable='true' ondblclick=" col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
-
+                                            {% if Moin.3 != None %} {{ Moin.3 }}{% else %}------{% endif %}
                                         </td>
                                         <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                            {% if Moin.4 != None %} {{ Moin.4 }}{% else %}------{% endif %}
                                         </td>
                                         <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                            {% if Moin.5 != None %} {{ Moin.5 }}{% else %}------{% endif %}
                                         </td>
                                         <td class="row-data" contenteditable='true' ondblclick="col=this.cellIndex; row=this.parentNode.rowIndex; document.getElementById( 'id01').style.display='block' ; ">
+                                            {% if Moin.6 != None %} {{ Moin.6 }}{% else %}------{% endif %}
                                         </td>
                                         <td>
                                             <input type="button" value="ثبت اطلاعات" class=" btn btn-warning" onclick="save()" \>

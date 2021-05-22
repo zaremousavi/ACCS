@@ -189,7 +189,7 @@ class Tafsili(models.Model):
         ]
 
 class MoinTafRel(models.Model):
-    Moin = models.ForeignKey(MoinAcc,on_delete=models.CASCADE, verbose_name='حساب معین')
+    Moin = models.ForeignKey(MoinAcc,on_delete=models.DO_NOTHING, verbose_name='حساب معین')
     Level = models.PositiveSmallIntegerField(validators=[MinValueValidator(1),MaxValueValidator(4)],verbose_name='سطح تفصیلی')
     GroupTaf = models.ForeignKey(GroupTaf,blank=True, null=True, on_delete= 'گروه تفصیلی')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر ثبت کننده')

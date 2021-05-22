@@ -1,6 +1,4 @@
-{% load static %}
-{% load widget_tweaks %}
-{% load base_tags %}
+{% load static %} {% load widget_tweaks %} {% load base_tags %}
 <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -12,23 +10,19 @@
             </div>
             <div class="pull-right info">
                 <p>{{ user.get_full_name }}</p>
-                {#          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>#}
+                <!--  <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a> -->
             </div>
         </div>
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                {#          <input type="text" name="q" class="form-control" placeholder="جستجو">#}
-                {#          <span class="input-group-btn">#}
-                {#                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>#}
-                {#                </button>#}
-                {#              </span>#}
+
             </div>
         </form>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            {#            <li class="header">منو</li>#}
+
             <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>حسابها</span>
@@ -37,14 +31,36 @@
             </span>
                 </a>
                 <ul class="nav treeview-menu">
-                    {#            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> داشبرد اول</a></li>#}
                     {% link request 'ListGroupAcc' 'حسابهای گروه' %}
+                    <!--12-->
                     {% link request 'ListKolAcc' 'حسابهای کل' %}
+                    <!--12-->
                     {% link request 'ListMoinAcc' 'حسابهای معین' %}
+                    <!--12-->
                     {% link request 'ListGroupTaf' 'گروه تفصیلی' %}
+                    <!--12-->
                     {% link request 'ListTafsili' 'تفصیلی' %}
+                    <!--12-->
                     {% link request 'ListMoinTafsili' 'ارتباط معین و گروه تفصیلی' %}
 
+                </ul>
+            </li>
+
+
+            <li class="treeview menu-open">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>اسناد</span>
+                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu" style="display: block;">
+                    <li><a href="#"><i class="fa fa-circle-o"></i>فهرست اسناد</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>صدور سند </a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>بررسی اسناد</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> مرتب کردن اسناد</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>صدور سند کل</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> اختتامیه </a></li>
                 </ul>
             </li>
 
@@ -52,11 +68,8 @@
 
 
 
-
-
-
-{#            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>#}
-{#            <li class="header">برچسب ها</li>#}
+            <!-- {#            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>مستندات</span></a></li>#}
+{#            <li class="header">برچسب ها</li>#} -->
 
         </ul>
     </section>
