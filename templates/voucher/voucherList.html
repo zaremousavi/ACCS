@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}{% block title-meta %} ثبت گروه حسابها {% endblock %}{% endblock %} {% block main %}
+{% extends 'base.html' %} {% block title %}{% block title-meta %} لیست اسناد {% endblock %}{% endblock %} {% block main %}
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
@@ -19,11 +19,9 @@
                         <div class="box box-info">
                             <div class="box-header">
                                 <i class="fa fa-info-circle"></i>
-                                <h3 class="box-title">گروه حسابها</h3>
+                                <h3 class="box-title">لیست اسناد</h3>
                                 <!-- tools box -->
-                                <h4><a class="label label-warning f" href="{% url 'Accounts:CreateGroupAcc' %}">ثبت
-                                        گروه حساب
-                                        جدید</a></h4>
+                                <h4><a class="label label-warning f" href="#">ثبت سند جدید</a></h4>
 
 
                                 <!-- /. tools -->
@@ -44,22 +42,23 @@
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <th>کد گروه</th>
-                                            <th>عنوان گروه</th>
-                                            <th>نوع</th>
-                                            <th>تاریخ ثبت</th>
-                                            <th>عملیات</th>
+                                            <th>شماره سند</th>
+                                            <th>تاریخ</th>
+                                            <th>وضعیت</th>
+                                            <th>نوع سند</th>
+                                            <th>شرح سند</th>
                                         </tr>
 
-                                        {% for GrAcc in object_list %}
+                                        {% for Voucher in object_list %}
                                         <tr>
-                                            <td>{{ GrAcc.CodeGroup }}</td>
-                                            <td>{{ GrAcc.TitleGroup }}</td>
-                                            <td>{{ GrAcc.Kind_s }}</td>
-                                            <td>{{ GrAcc.JDateSabt }}</td>
+                                            <td>{{ Voucher.VoucherNo }}</td>
+                                            <td>{{ Voucher.JVoucherDate }}</td>
+                                            <td>{{ Voucher.Kinds }}</td>
+                                            <td>{{ Voucher.Conds }}</td>
+                                            <td>{{ Voucher.Desc }}</td>
                                             <td>
                                                 <a class="label label-danger" href="{% url 'Accounts:UpdateGroupAcc' GrAcc.pk %}">ویرایش</a>
-                                                <a class="label label-success" href="#">نمایش حسابهای کل</a>
+                                                <!-- <a class="label label-success" href="#">نمایش حسابهای کل</a> -->
                                             </td>
                                         </tr>
 

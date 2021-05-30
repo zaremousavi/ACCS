@@ -6,6 +6,7 @@ urlpatterns = [
     path('',include('Company.urls'),name= 'home'),
     path('authent/', include('authent.urls'), name='authent'),
     path('Accounts/', include('Accounts.urls'), name='Accounts'),
+    path('Voucher/',include('voucher.urls'),name='voucher'),
 
 ]
 

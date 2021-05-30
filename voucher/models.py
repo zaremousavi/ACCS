@@ -4,7 +4,7 @@ from authent.models import User
 from Company.models import Company
 from extensions.utils import jalali_converter
 from Accounts.models import KolAcc, MoinAcc, Tafsili, MoinTafRel
-from django.core.exceptions import ValidationError
+
 # Create your models here.
 
 
@@ -22,14 +22,14 @@ class VoucherHDR(models.Model):
 
 
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING,related_name='Sabt', verbose_name='کاربر ثبت کننده')
-    UserCheck = models.ForeignKey(User, on_delete=models.DO_NOTHING,related_name='Check', verbose_name='کاربر تایید کننده')
+    UserCheck = models.ForeignKey(User,null=True, blank=True ,on_delete=models.DO_NOTHING,related_name='Check', verbose_name='کاربر تایید کننده')
     DateSabt = models.DateTimeField(default=now, auto_created=True, verbose_name='تاریخ ایجاد')
     Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 
     def __str__(self):
-        return '{}--{}--{}'.format(self.VoucherNo, self.JDate, self.Condition)
+        return '{}--{}--{}'.format(self.VoucherNo, self.JVoucherDate, self.Condition)
 
-    def JDate(self):
+    def JVoucherDate(self):
         return jalali_converter(self.VoucherDate)
 
     def Kinds(self):
@@ -52,8 +52,6 @@ class VoucherHDR(models.Model):
 
 
 class VoucherDTL(models.Model):
-
-
     VoucherHDR= models.ForeignKey(VoucherHDR,  on_delete=models.DO_NOTHING, verbose_name= "شماره سند")
     CodeKol = models.ForeignKey(KolAcc, on_delete=models.DO_NOTHING, verbose_name=("حساب کل"))
     CodeMoin = models.ForeignKey(MoinAcc, on_delete=models.DO_NOTHING, verbose_name=("حساب معین"))

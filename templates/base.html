@@ -40,7 +40,13 @@
     <![endif]-->
 
     <!-- Google Font -->
+    <!-- <link href="{% static 'adminLTE/PersianDate/Content/bootstrap.min.css' %}" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="{% static 'adminLTE/PersianDate/Content/bootstrap-theme.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'adminLTE/PersianDate/Content/MdBootstrapPersianDateTimePicker/jquery.Bootstrap-PersianDateTimePicker.css' %}" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="{% static 'adminLTE/PersianDate/Scripts/jquery-2.1.4.js' %}" type="text/javascript"></script>
+    <script src="{% static 'adminLTE/PersianDate/Scripts/bootstrap.min.js' %}" type="text/javascript"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -66,6 +72,9 @@
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">نمایش سایت</a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link" style="color: rgb(255, 235, 58);">{{ Jtime }}</a>
                     </li>
                 </ul>
 
@@ -329,7 +338,7 @@
                 <!-- Small boxes (Stat box) -->
                 <!-- /.row (main row) -->
 
-                {# {% include 'content.html' %}#} {% block main %} {% endblock %}
+                {% block main %} {% endblock %}
             </div>
             <!-- /.container-fluid -->
         </section>
@@ -387,6 +396,8 @@
     <script src="{% static 'adminLTE/dist/js/pages/dashboard.js' %}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{% static 'adminLTE/dist/js/demo.js' %}"></script>
+    <script src="{% static 'adminLTE/PersianDate/Scripts/MdBootstrapPersianDateTimePicker/calendar.js' %}" type="text/javascript"></script>
+    <script src="{% static 'adminLTE/PersianDate/Scripts/MdBootstrapPersianDateTimePicker/jquery.Bootstrap-PersianDateTimePicker.js' %}" type="text/javascript"></script>
     {% block js %}{% endblock %}
 </body>
 

@@ -130,7 +130,7 @@ class DeleteTafsili(AccessTafsiliMixin, FormValidTafsiliMixin, FieldTafsiliMixin
     model = GroupTaf
     template_name = 'Account/TafsiliCreateUpdate.html'
 
-
+@login_required
 def ListMoinTafRel(request):
     SQL = 'select K."CodeKol" as "CodeKol", M."CodeMoin", M."TitleMoin",\
                 (select "CodeGroupTaf" from "GroupTaf" where id=(select max("GroupTaf_id") from "MoinTafRel" TR where TR."Moin_id"=M."id" and TR."Level"=1)) as Taf1,\
