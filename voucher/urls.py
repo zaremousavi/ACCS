@@ -7,7 +7,7 @@ app_name = 'Voucher'
 urlpatterns = [
     path('ListVoucher',views.ListVoucher.as_view(),name='ListVoucher'),
     path('PreCreateVoucher',views.PreCreateVoucher,name='PreCreateVoucher'),
-    path('KolCheck', views.KolCheck.as_view(), name='KolCheck'),
-    path('MoinCheck', views.MoinCheck.as_view(), name='MoinCheck'),
+    path('SaveVoucherHdr', views.SaveVoucherHdr.as_view(), name='SaveVoucherHdr'),
+    path('SaveVoucherDtl', views.SaveVoucherDtl.as_view(), name='SaveVoucherDtl'),
 
 ]

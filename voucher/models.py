@@ -53,16 +53,17 @@ class VoucherHDR(models.Model):
 
 class VoucherDTL(models.Model):
     VoucherHDR= models.ForeignKey(VoucherHDR,  on_delete=models.DO_NOTHING, verbose_name= "شماره سند")
+    Row = models.IntegerField(verbose_name='ردیف')
     CodeKol = models.ForeignKey(KolAcc, on_delete=models.DO_NOTHING, verbose_name=("حساب کل"))
     CodeMoin = models.ForeignKey(MoinAcc, on_delete=models.DO_NOTHING, verbose_name=("حساب معین"))
-    Taf1 = models.ForeignKey(Tafsili, on_delete=models.DO_NOTHING,related_name='Taf1', verbose_name=("حساب تفصیلی ۱"))
-    Taf2 = models.ForeignKey(Tafsili, on_delete=models.DO_NOTHING,related_name='Taf2', verbose_name=("حساب تفصیلی ۲"))
-    Taf3 = models.ForeignKey(Tafsili, on_delete=models.DO_NOTHING,related_name='Taf3', verbose_name=("حساب تفصیلی ۳"))
-    Taf4 = models.ForeignKey(Tafsili, on_delete=models.DO_NOTHING,related_name='Taf4', verbose_name=("حساب تفصیلی ۴"))
+    Taf1 = models.ForeignKey(Tafsili, null=True, blank=True, on_delete=models.DO_NOTHING,related_name='Taf1', verbose_name=("حساب تفصیلی ۱"))
+    Taf2 = models.ForeignKey(Tafsili, null=True, blank=True, on_delete=models.DO_NOTHING,related_name='Taf2', verbose_name=("حساب تفصیلی ۲"))
+    Taf3 = models.ForeignKey(Tafsili, null=True, blank=True, on_delete=models.DO_NOTHING,related_name='Taf3', verbose_name=("حساب تفصیلی ۳"))
+    Taf4 = models.ForeignKey(Tafsili, null=True, blank=True, on_delete=models.DO_NOTHING,related_name='Taf4', verbose_name=("حساب تفصیلی ۴"))
     Disc = models.CharField(max_length=200,null=True, blank=True, verbose_name='شرح ردیف سند')
     Debit = models.DecimalField(max_digits=20,decimal_places=0,verbose_name='بدهکار')
     Credit = models.DecimalField(max_digits=20,decimal_places=0,verbose_name='بستانکار')
-    File = models.FileField(verbose_name='فایل پیوست')
+    File = models.FileField(null=True, blank=True,verbose_name='فایل پیوست')
     UserSabt = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='کاربر')
     Company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, verbose_name='شرکت')
 

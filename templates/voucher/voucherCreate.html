@@ -48,17 +48,17 @@
 
                                                                     <div class="col-md-1">
                                                                         <label for="exampleInputEmail1" style="color: darkblue;"> تاریخ سند:</label>
-                                                                        <input type="text" class="form-control" id="fromDate1" value="{{ tms }}" style="width:90px; border-radius: 5px;" placeholder="تاریخ" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true"
+                                                                        <input type="text" class="form-control" id="fromDate1" value="{{ tms }}" style="width:100px; border-radius: 5px;" placeholder="تاریخ" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true"
                                                                             data-enabletimepicker="false" data-placement="right" />
 
                                                                     </div>
                                                                     <div class="col-md-1">
                                                                         <label for="exampleInputEmail1" style="color: darkblue;"> نوع سند:</label>
-                                                                        <input type="text" class="form-control" id="VoucherNo" style="border-radius: 5px;" placeholder="شماره سند">
+                                                                        <input type="text" class="form-control" id="VKind" style="border-radius: 5px;" placeholder="شماره سند">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label for="exampleInputEmail1" style="color: darkblue;"> شرح سند:</label>
-                                                                        <input type="text" class="form-control" id="VoucherNo" style="border-radius: 5px;" placeholder="شماره سند">
+                                                                        <input type="text" class="form-control" id="VDesc" style="border-radius: 5px;" placeholder="شماره سند">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -76,24 +76,24 @@
                                             <form method="post">
                                                 {% csrf_token %}
                                                 <div class="row">
-                                                    <input type="text" class="kol" id="kol" style="width: 130px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد کل" />
+                                                    <input type="text" class="tmp" id="kol" style="width: 130px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد کل" />
 
-                                                    <input type="text" class="moin" id="moin" style="width: 130px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد معین" />
-                                                    <input type="text" class="taf1" id="taf1" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی۱" />
-                                                    <input type="text" class="taf2" id="taf2" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۲" />
-                                                    <input type="text" class="taf3" id="taf3" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۳" />
-                                                    <input type="text" class="taf4" id="taf4" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۴" />
-                                                    <input type="text" class="desc" id="desc" style="width: 290px; color:blue; background-color: rgb(253, 255, 148);" placeholder="شرح ردیف" />
-                                                    <input type="text" class="debit" id="debit" style="width: 170px; color:blue; background-color: rgb(253, 255, 148);" placeholder="بدهکار" />
-                                                    <input type="text" class="credit" id="credit" style="width: 170px; color:blue; background-color: rgb(253, 255, 148);" placeholder="بستانکار" />
+                                                    <input type="text" class="tmp" id="moin" style="width: 130px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد معین" />
+                                                    <input type="text" class="tmp" id="taf1" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی۱" />
+                                                    <input type="text" class="tmp" id="taf2" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۲" />
+                                                    <input type="text" class="tmp" id="taf3" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۳" />
+                                                    <input type="text" class="tmp" id="taf4" style="width: 120px; color:blue; background-color: rgb(253, 255, 148);" placeholder="کد تفصیلی ۴" />
+                                                    <input type="text" class="tmp" id="desc" style="width: 290px; color:blue; background-color: rgb(253, 255, 148);" placeholder="شرح ردیف" />
+                                                    <input type="text" class="tmp" id="debit" style="width: 170px; color:blue; background-color: rgb(253, 255, 148);" placeholder="بدهکار" />
+                                                    <input type="text" class="tmp" id="credit" style="width: 170px; color:blue; background-color: rgb(253, 255, 148);" placeholder="بستانکار" />
                                                     <input type="button" id="Add" class="btn btn-primary" value="اضافه" />
                                                     <br>
-                                                    <label id="koltitle" style="width: 130px; color: gray;"></label>
-                                                    <label id="mointitle" style="width: 120px; color: gray;"></label>
-                                                    <label id="taf1title" style="width: 120px; color: gray;"></label>
-                                                    <label id="taf2title" style="width: 120px; color: gray;"></label>
-                                                    <label id="taf3title" style="width: 120px; color: gray;"></label>
-                                                    <label id="taf4title" style="width: 120px; color: gray;"></label>
+                                                    <label class="lbl" id="koltitle" style="width: 130px; color: gray;"></label>
+                                                    <label class="lbl" id="mointitle" style="width: 120px; color: gray;"></label>
+                                                    <label class="lbl" id="taf1title" style="width: 120px; color: gray;"></label>
+                                                    <label class="lbl" id="taf2title" style="width: 120px; color: gray;"></label>
+                                                    <label class="lbl" id="taf3title" style="width: 120px; color: gray;"></label>
+                                                    <label class="lbl" id="taf4title" style="width: 120px; color: gray;"></label>
 
 
 
@@ -101,24 +101,25 @@
                                                     <table class="table table-bordered" id="tbl">
                                                         <tbody>
                                                             <tr>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px">کد کل</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px">کد معین</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px"> تفصیلی۱</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px"> تفصیلی ۲</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px"> تفصیلی ۳</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =120px"> تفصیلی ۴</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =290px">شرح ردیف</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =170px">بدهکار</th>
-                                                                <th style="background-color: rgb(218, 218, 218); width: =170px">بستانکار</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;">کد کل</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;">کد معین</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;"> تفصیلی۱</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;"> تفصیلی ۲</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;"> تفصیلی ۳</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 120px;"> تفصیلی ۴</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 290px;">شرح ردیف</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 170px;">بدهکار</th>
+                                                                <th style="background-color: rgb(218, 218, 218); width: 170px;">بستانکار</th>
                                                                 <th style="background-color: rgb(218, 218, 218);">عملیات</th>
 
                                                             </tr>
 
 
                                                             <tr>
-                                                                <td colspan="7" style="text-align: center; background-color: pink; color: blue;">جمع</td>
+                                                                <td colspan="7" style="text-align: left; background-color: pink; color: blue; font-size: large;">جمع</td>
                                                                 <td id= "sumdeb" style="background-color: pink; color: blue;"></td>
                                                                 <td id = "sumcre" style="background-color: pink; color: blue;"></td>
+                                                                <td style="background-color: pink; color: blue;"></td>
                                                             </tr>
 
 
@@ -129,7 +130,7 @@
                                                 </div>
 
 
-                                                <button class="btn btn-success" onclick="#">ثبت </button>
+                                                
                                             </form>
                                         </div>
                                     </div>
@@ -149,20 +150,24 @@
                     <!-- /.container-fluid -->
                 </section>
 
-
+                <button class="btn btn-success" onclick="save()">ثبت </button>
 
                 <!--test-->
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                انتها
+
             </div>
             <!-- /.box-footer-->
         </div>
     </section>
 </div>
 <script>
-    var bd=0 , bs=0 ;
+    $('input').keydown( e => e.which === 13?$(e.target).next().focus():"");
+    $(function() {
+        $("#kol").focus();
+    });
+    var bd=0 , bs=0 , id=0;
     var table = document.getElementById('tbl');
     var kol = document.getElementById('kol');
     var moin = document.getElementById('moin');
@@ -178,13 +183,13 @@
     var tf = {{ tf|safe }};
 
     kol.addEventListener("blur", function() {
-        console.log(kolmoin);
+        
         var flag = false;
         if (kol.value != "") {
             for (i=0;i<kolmoin.length;i++){
                 if (kol.value == kolmoin[i][0]){
                     document.getElementById('koltitle').innerHTML = kolmoin[i][1];
-                    console.log(Kolss[i][1]);
+                    // console.log(Kolss[i][1]);
                     flag = true;
                     break;
                 }
@@ -343,7 +348,7 @@
 
         for (i=0;i<mtr.length;i++){
             if (moin.value == mtr[i][0]){
-                console.log(mtr[i][1]);
+                // console.log(mtr[i][1]);
                 if ((taf1.value=='')&(mtr[i][1]==1)){
                     result.push('تفصیلی ۱ بایستی وارد شود.');
                     result[0]= false;
@@ -397,10 +402,28 @@
 
     };
 
+    function delrow(a){
+        var id= a.parentNode.parentNode.rowIndex;
+
+        var sbd= table.rows[id].cells[7].innerHTML;
+        var sbs = table.rows[id].cells[8].innerHTML;
+        if (sbd!=''){
+            bd -= parseInt(sbd.replace(/,/g, ''),10);   
+            document.getElementById('sumdeb').innerHTML= bd.toLocaleString(); 
+        };
+        
+        if (sbs!=''){
+            bs -= parseInt(sbs.replace(/,/g, ''),10);   
+            document.getElementById('sumcre').innerHTML= bs.toLocaleString(); 
+        };
+        
+        table.deleteRow(id);
+    };
+
     var btn = document.getElementById('Add');
     btn.addEventListener("click", function(){
         var chk = Check();
-        console.log(chk);
+        // console.log(chk);
         if (chk[0]==false){
             for (i=1;i<chk.length;i++){
                 alert(chk[i]);
@@ -426,22 +449,150 @@
             cell5.innerHTML = taf3.value;
             cell6.innerHTML = taf4.value;
             cell7.innerHTML = desc.value;
-            cell8.innerHTML = debit.value;
-            cell9.innerHTML = credit.value;
-            cell10.innerHTML = '<a class="label label-success" href="#">حذف</a>';
+            var id = (table.rows.length-2).toString(); 
+            cell10.innerHTML = '<a class="label label-success" onclick="delrow(this)" id="'+id+'" href="#a">حذف</a>';
             if (debit.value!=''){
                 bd += parseInt(debit.value, 10);
+                cell8.innerHTML = parseInt(debit.value,10).toLocaleString();
             };
             if (credit.value != ''){
                 bs += parseInt(credit.value, 10);
+                cell9.innerHTML = parseInt(credit.value,10).toLocaleString();
             };
-            document.getElementById('sumdeb').innerHTML= bd.toString();
-            document.getElementById('sumcre').innerHTML= bs.toString();
+            document.getElementById('sumdeb').innerHTML= bd.toLocaleString();
+            document.getElementById('sumcre').innerHTML= bs.toLocaleString();
+            // $('.tmp').val("");
+            // $('.lbl').text("");
+            // $('#Add').val("اضافه");
 
         };
-    });
 
-    
+        kol.focus();
+    });
+// save to database
+    function save(){
+        if (checksave()){
+            let csrftoken = '{{ csrf_token }}';
+            var data = {
+                VoucherDate: $('#fromDate1').val(),
+                Year: 1400,
+                VoucherKind: 1,
+                Condition: 1,
+                VDesc : $('#VDesc').val()
+            };
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                url: "{% url 'Voucher:SaveVoucherHdr' %} ",
+                data: JSON.stringify(data),
+                datatype: 'json',
+                contentType: 'application/json',
+                success: function(data) {
+                    if (data.msg == 'success') {
+                        
+                        $('#VoucherNo').val(data.VNo);
+                        id = data.id;
+                        saveDTL();
+                        alert('سند با شماره '+data.VNo+ 'ثبت شد');
+                        window.location.href = "{% url 'Voucher:PreCreateVoucher' %}";
+                        // ذخیره شد
+                    } else if (data.msg == 'error') {
+                        alert('خطا');
+                    }
+                },
+                error: function(data) {
+                    if (data.msg == 'error') {
+                        alert('is error');
+                    }
+                }
+
+
+            });
+        };
+    };
+    // save detail
+    function saveDTL(){
+        var Len= $('#tbl').find('tr').length;
+        console.log(Len);
+        for (i=1;i<(Len-1);i++){
+            let csrftoken = '{{ csrf_token }}';
+            var data = {
+                id : id,
+                Row: i,
+                CodeKol: table.rows[i].cells[0].innerHTML,
+                CodeMoin: table.rows[i].cells[1].innerHTML,
+                Taf1: table.rows[i].cells[2].innerHTML,
+                Taf2: table.rows[i].cells[3].innerHTML,
+                Taf3: table.rows[i].cells[4].innerHTML,
+                Taf4: table.rows[i].cells[5].innerHTML,
+                Disc: table.rows[i].cells[6].innerHTML,
+                Debit: parseInt(table.rows[i].cells[7].innerHTML.replace(/,/g, ''),10),
+                Credit: parseInt(table.rows[i].cells[8].innerHTML.replace(/,/g, ''),10)
+            };
+            console.log(i);
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                url: "{% url 'Voucher:SaveVoucherDtl' %} ",
+                data: JSON.stringify(data),
+                datatype: 'json',
+                contentType: 'application/json',
+                success: function(data) {
+                    if (data.msg='success'){
+                        console.log('ok');
+                    }
+                },
+                error: function(data) {
+                    if (data.msg='error'){
+                        alert('error');
+                    }
+                }
+            });
+
+        };
+    };
+    // check to save
+    function checksave(){
+        var flag = true;
+        var tablerowcount = $('#tbl').find('tr').length;
+        if (tablerowcount==2){
+            alert('ردیف سند وارد نشده است');
+            flag = false;
+        };
+        if (bd!=bs){
+            alert('سند تراز نیست');
+            flag = false;
+        };
+        var Datestr = $('#fromDate1').val()
+        
+        if (!checkShamsi(Datestr)) {
+            alert("تاریخ وارد شده معتبر نیست!");
+            flag = false;
+        }
+        return flag;
+    };
+
+
+    function checkShamsi(str) {
+        var patt = /(13|14)([0-9][0-9])\/(((0?[1-6])\/((0?[1-9])|([12][0-9])|(3[0-1])))|(((0?[7-9])|(1[0-2]))\/((0?[1-9])|([12][0-9])|(30))))/g;
+        var result = patt.test(str);
+        if (result) {
+            var pos = str.indexOf('/');
+            var year = str.substring(0,pos);
+            var nextPos = str.indexOf('/',pos+1);
+            var month = str.substring(pos+1,nextPos);
+            var day = str.substring(nextPos+1);
+            if(month==12 && (year+1)%4 != 0 && day==30) { // kabise = 1379, 1383, 1387,... (year +1) divides on 4 remains 0
+                result = true;
+            };   
+            
+        }; 
+        return result;
+    };
 
 </script>
 

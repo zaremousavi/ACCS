@@ -7,8 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .mixins import FieldMixinVoucherDTL
 from Accounts.models import KolAcc, MoinAcc, Tafsili,  MoinTafRel 
 from extensions.utils import jalalif
+from extensions import jalali 
 from django.utils import timezone
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Max
+from django.utils.timezone import now
+from Company.models import Company
+
 # Create your views here.
 
 class ListVoucher(LoginRequiredMixin,ListView):
@@ -64,3 +69,99 @@ class MoinCheck(LoginRequiredMixin,View):
 
         else:
             return JsonResponse({'msg':'error in loading ajax...'})
+
+
+class SaveVoucherHdr(LoginRequiredMixin, CreateView):
+    def post(self, request, *args, **kwargs):
+        import json
+        if request.is_ajax:
+            VHR = VoucherHDR.objects.filter(Company=request.user.is_company)
+            if VHR.exists():
+                 
+                tmp = VHR.aggregate(Max('VoucherNo'),Max('AtfNo'),Max('FarieNo'))
+                VNo = tmp['VoucherNo__max'] +1 
+                ANo = tmp['AtfNo__max'] +1 
+                FNo = tmp['FarieNo__max'] +1 
+            else:
+                VNo = 1
+                ANo = 1
+                FNo = 1
+
+            VDate = json.loads(request.body)["VoucherDate"].strip('\n')
+            VDate = jalali.Persian(VDate).gregorian_datetime
+
+            Year = json.loads(request.body)["Year"]
+            VKind = json.loads(request.body)["VoucherKind"]
+            Cdn = json.loads(request.body)["Condition"]
+            VDesc = json.loads(request.body)["VDesc"]
+
+            frm = VoucherHDR(VoucherNo= VNo , AtfNo= ANo, FarieNo= FNo, VoucherDate = VDate, VoucherKind= VKind, Condition= Cdn,
+                            Desc= VDesc, Year= Year, UserSabt = request.user ,
+                            Company = Company.objects.get(pk=request.user.is_company.pk), DateSabt=now())
+            frm.save()
+            return JsonResponse({'msg':'success', 'id': frm.id, 'VNo':VNo, 'ANo': ANo})
+
+        else:
+            return JsonResponse({'msg':'error'})
+
+
+class SaveVoucherDtl(LoginRequiredMixin, CreateView):
+    def post(self, request, *args, **kwargs):
+        import json
+        if request.is_ajax:
+            print(json.loads(request.body)["Debit"])
+            id = json.loads(request.body)["id"]
+            Row = json.loads(request.body)["Row"]
+            CodeKol = json.loads(request.body)["CodeKol"].strip('\n')
+            CodeMoin = json.loads(request.body)["CodeMoin"].strip('\n')
+            Taf1 = json.loads(request.body)["Taf1"].strip('\n')
+            Taf2 = json.loads(request.body)["Taf2"].strip('\n')
+            Taf3 = json.loads(request.body)["Taf3"].strip('\n')
+            Taf4 = json.loads(request.body)["Taf4"].strip('\n')
+            Disc = json.loads(request.body)["Disc"].strip('\n')
+            if json.loads(request.body)["Debit"] != None:
+                Debit = json.loads(request.body)["Debit"]
+            else:
+                Debit = 0
+            if json.loads(request.body)["Credit"] != None:
+                Credit = json.loads(request.body)["Credit"]
+            else:
+                Credit = 0
+            
+            try :
+                frm = VoucherDTL()
+                frm.VoucherHDR = VoucherHDR.objects.get(pk=id)
+                frm.Row = Row
+                frm.CodeKol = KolAcc.objects.get(CodeKol__exact=CodeKol, Company=request.user.is_company)
+                frm.CodeMoin = CodeMoin = MoinAcc.objects.get(CodeMoin__exact=CodeMoin, Company=request.user.is_company)
+                if Taf1 != '' :
+                    frm.Taf1 = Tafsili.objects.get(CodeTafsili__exact= Taf1, Company=request.user.is_company)
+                if Taf2 != '' :
+                    frm.Taf2 = Tafsili.objects.get(CodeTafsili__exact= Taf2, Company=request.user.is_company)
+                if Taf3 != '' :
+                    frm.Taf3 = Tafsili.objects.get(CodeTafsili__exact= Taf3, Company=request.user.is_company)
+                if Taf4 != '' :
+                    frm.Taf4 = Tafsili.objects.get(CodeTafsili__exact= Taf4, Company=request.user.is_company)
+                frm.Desc = Disc
+                frm.Debit = Debit
+                frm.Credit = Credit
+                frm.UserSabt = request.user
+                frm.Company = request.user.is_company 
+                frm.save()
+            except Exception as e:
+                print(e)
+
+
+            # frm = VoucherDTL(VoucherHDR= VoucherHDR.objects.get(pk=id),Row=Row, 
+            #         CodeKol=KolAcc.objects.get(CodeKol__exact=CodeKol, Company=request.user.is_company),
+            #         CodeMoin = MoinAcc.objects.get(CodeMoin__exact=CodeMoin, Company=request.user.is_company),
+            #         Taf1 = Tafsili.objects.get(CodeTafsili__exact= Taf1, Company=request.user.is_company),
+            #         Taf2 = Tafsili.objects.get(CodeTafsili__exact= Taf2, Company=request.user.is_company),
+            #         Taf3 = Tafsili.objects.get(CodeTafsili__exact= Taf3, Company=request.user.is_company),
+            #         Taf4 = Tafsili.objects.get(CodeTafsili__exact= Taf4, Company=request.user.is_company),
+            #         Disc = Disc, Debit=Debit, Credit=Credit)
+            
+            return JsonResponse({'msg':'success'})
+        else:
+            return JsonResponse({'msg':'error'})
+                    
